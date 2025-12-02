@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './Calculator.css';
 
 function Calculator() {
+  const [userName, setUserName] = useState('');
   const [expression, setExpression] = useState('');
   const [display, setDisplay] = useState('0');
 
@@ -61,6 +62,16 @@ function Calculator() {
 
   return (
     <div className="calculator">
+      <div className="user-info">
+        <input 
+          type="text" 
+          placeholder="Ingresa tu nombre" 
+          value={userName}
+          onChange={(e) => setUserName(e.target.value)}
+          className="name-input"
+        />
+        {userName && <p className="greeting">¡Hola, {userName}!</p>}
+      </div>
       <div className="display">
         <input type="text" value={display} readOnly />
       </div>

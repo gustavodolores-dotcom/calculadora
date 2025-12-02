@@ -6,6 +6,36 @@
   width: 320px;
 }
 
+.user-info {
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.name-input {
+  width: 100%;
+  padding: 12px;
+  font-size: 14px;
+  border: 2px solid #0984e3;
+  border-radius: 10px;
+  background-color: #1e272e;
+  color: #fff;
+  margin-bottom: 10px;
+  transition: all 0.3s ease;
+}
+
+.name-input:focus {
+  outline: none;
+  border-color: #74b9ff;
+  box-shadow: 0 0 10px rgba(116, 185, 255, 0.5);
+}
+
+.greeting {
+  color: #74b9ff;
+  font-size: 14px;
+  font-weight: bold;
+  margin: 0;
+}
+
 .display {
   margin-bottom: 20px;
 }
