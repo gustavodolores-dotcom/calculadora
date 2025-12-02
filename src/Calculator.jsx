@@ -49,6 +49,7 @@ function Calculator() {
         calculation = calculation.slice(0, -1);
       }
 
+      // eslint-disable-next-line no-eval
       let result = eval(calculation);
       result = Math.round(result * 100000000) / 100000000;
 
