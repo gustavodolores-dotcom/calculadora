@@ -70,7 +70,11 @@ function Calculator() {
       setDbLog([...logs]);
       setDbStatus('testing');
 
-      const response = await fetch('http://localhost:5000/api/health', {
+      const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+      logs.push(`📍 URL API: ${apiUrl}`);
+      setDbLog([...logs]);
+
+      const response = await fetch(`${apiUrl}/health`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -89,6 +93,7 @@ function Calculator() {
       setDbLog([...logs]);
     } catch (error) {
       logs.push(`❌ Error de conexión: ${error.message}`);
+      logs.push('💡 Asegúrate de que el servidor backend está corriendo en puerto 5000');
       setDbStatus('failed');
       setDbLog([...logs]);
       console.error('Error:', error);
