@@ -5,6 +5,8 @@ function Calculator() {
   const [userName, setUserName] = useState('');
   const [expression, setExpression] = useState('');
   const [display, setDisplay] = useState('0');
+  const [dbStatus, setDbStatus] = useState('');
+  const [dbLog, setDbLog] = useState([]);
 
   const appendNumber = (number) => {
     const newExpression = expression + number;
@@ -61,6 +63,38 @@ function Calculator() {
     }
   };
 
+  const testDatabaseConnection = async () => {
+    const logs = [];
+    try {
+      logs.push('🔄 Probando conexión con la base de datos...');
+      setDbLog([...logs]);
+      setDbStatus('testing');
+
+      const response = await fetch('http://localhost:5000/api/health', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      logs.push(`📡 Respuesta del servidor: ${response.status}`);
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      logs.push(`✅ Conexión exitosa: ${JSON.stringify(data)}`);
+      setDbStatus('connected');
+      setDbLog([...logs]);
+    } catch (error) {
+      logs.push(`❌ Error de conexión: ${error.message}`);
+      setDbStatus('failed');
+      setDbLog([...logs]);
+      console.error('Error:', error);
+    }
+  };
+
   return (
     <div className="calculator">
       <div className="user-info">
@@ -72,6 +106,23 @@ function Calculator() {
           className="name-input"
         />
         {userName && <p className="greeting">¡Hola, {userName}!</p>}
+        <button className="btn-db-test" onClick={testDatabaseConnection}>
+          🔌 Probar DB
+        </button>
+        {dbStatus && (
+          <div className={`db-status ${dbStatus}`}>
+            {dbStatus === 'testing' && '⏳ Probando...'}
+            {dbStatus === 'connected' && '✅ Conectado'}
+            {dbStatus === 'failed' && '❌ Error'}
+          </div>
+        )}
+        {dbLog.length > 0 && (
+          <div className="db-log">
+            {dbLog.map((log, index) => (
+              <p key={index} className="log-entry">{log}</p>
+            ))}
+          </div>
+        )}
       </div>
       <div className="display">
         <input type="text" value={display} readOnly />

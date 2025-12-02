@@ -33,7 +33,72 @@
   color: #74b9ff;
   font-size: 14px;
   font-weight: bold;
-  margin: 0;
+  margin: 0 0 10px 0;
+}
+
+.btn-db-test {
+  width: 100%;
+  padding: 10px;
+  font-size: 12px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: #6c5ce7;
+  color: #fff;
+  transition: all 0.3s ease;
+  margin-bottom: 10px;
+}
+
+.btn-db-test:hover {
+  background-color: #a29bfe;
+  transform: scale(1.02);
+}
+
+.btn-db-test:active {
+  transform: scale(0.98);
+}
+
+.db-status {
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  transition: all 0.3s ease;
+}
+
+.db-status.testing {
+  background-color: #fdcb6e;
+  color: #000;
+}
+
+.db-status.connected {
+  background-color: #00b894;
+  color: #fff;
+}
+
+.db-status.failed {
+  background-color: #d63031;
+  color: #fff;
+}
+
+.db-log {
+  background-color: #1e272e;
+  border: 1px solid #636e72;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 10px;
+  max-height: 120px;
+  overflow-y: auto;
+}
+
+.log-entry {
+  margin: 5px 0;
+  font-size: 11px;
+  color: #74b9ff;
+  font-family: 'Courier New', monospace;
+  word-break: break-word;
 }
 
 .display {
